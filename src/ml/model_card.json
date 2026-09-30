@@ -1,0 +1,533 @@
+{
+  "model_version": "v1.0.0",
+  "champion": "xgboost_weighted",
+  "selection_metric": "validation PR-AUC",
+  "random_state": 42,
+  "dataset": "UCI Statlog (German Credit Data), 1000 applications",
+  "excluded_protected_attributes": [
+    "personal_status_sex",
+    "foreign_worker"
+  ],
+  "split": {
+    "train": 600,
+    "validation": 200,
+    "test": 200
+  },
+  "data_quality": {
+    "rows": 1000,
+    "columns": 21,
+    "missing_values": {},
+    "duplicate_rows": 0,
+    "iqr_outliers": {
+      "duration_months": 70,
+      "credit_amount": 72,
+      "installment_rate_pct_income": 0,
+      "present_residence_since": 0,
+      "age_years": 23,
+      "existing_credits_count": 6,
+      "dependents": 155
+    },
+    "class_counts": {
+      "0": 700,
+      "1": 300
+    },
+    "default_rate": 0.3,
+    "imbalance_ratio": 2.3333333333333335
+  },
+  "validation_leaderboard": [
+    {
+      "candidate": "logistic_regression",
+      "model": "logistic_regression",
+      "class_weighted": false,
+      "training_time_seconds": 0.065,
+      "roc_auc": 0.8022619047619047,
+      "pr_auc": 0.6531865319195773,
+      "accuracy": 0.765,
+      "precision": 0.6382978723404256,
+      "recall": 0.5,
+      "f1": 0.5607476635514018,
+      "brier_score": 0.1585176484058512,
+      "threshold": 0.5
+    },
+    {
+      "candidate": "logistic_regression_weighted",
+      "model": "logistic_regression",
+      "class_weighted": true,
+      "training_time_seconds": 0.04,
+      "roc_auc": 0.7997619047619047,
+      "pr_auc": 0.6465336871748106,
+      "accuracy": 0.705,
+      "precision": 0.5056179775280899,
+      "recall": 0.75,
+      "f1": 0.6040268456375839,
+      "brier_score": 0.19006685398571066,
+      "threshold": 0.5
+    },
+    {
+      "candidate": "random_forest",
+      "model": "random_forest",
+      "class_weighted": false,
+      "training_time_seconds": 1.161,
+      "roc_auc": 0.8354761904761904,
+      "pr_auc": 0.6795158723355714,
+      "accuracy": 0.77,
+      "precision": 0.7058823529411765,
+      "recall": 0.4,
+      "f1": 0.5106382978723404,
+      "brier_score": 0.15518522361805456,
+      "threshold": 0.5
+    },
+    {
+      "candidate": "random_forest_weighted",
+      "model": "random_forest",
+      "class_weighted": true,
+      "training_time_seconds": 2.037,
+      "roc_auc": 0.841547619047619,
+      "pr_auc": 0.6901242162480085,
+      "accuracy": 0.765,
+      "precision": 0.5866666666666667,
+      "recall": 0.7333333333333333,
+      "f1": 0.6518518518518519,
+      "brier_score": 0.16465356538839984,
+      "threshold": 0.5
+    },
+    {
+      "candidate": "xgboost",
+      "model": "xgboost",
+      "class_weighted": false,
+      "training_time_seconds": 4.683,
+      "roc_auc": 0.8286904761904762,
+      "pr_auc": 0.6964576491634523,
+      "accuracy": 0.785,
+      "precision": 0.6666666666666666,
+      "recall": 0.5666666666666667,
+      "f1": 0.6126126126126126,
+      "brier_score": 0.14638443291187286,
+      "threshold": 0.5
+    },
+    {
+      "candidate": "xgboost_weighted",
+      "model": "xgboost",
+      "class_weighted": true,
+      "training_time_seconds": 6.367,
+      "roc_auc": 0.8219047619047619,
+      "pr_auc": 0.7037639751278948,
+      "accuracy": 0.775,
+      "precision": 0.6086956521739131,
+      "recall": 0.7,
+      "f1": 0.6511627906976745,
+      "brier_score": 0.1582290083169937,
+      "threshold": 0.5
+    }
+  ],
+  "test_metrics": {
+    "roc_auc": 0.770952380952381,
+    "pr_auc": 0.5695451266798351,
+    "accuracy": 0.705,
+    "precision": 0.5074626865671642,
+    "recall": 0.5666666666666667,
+    "f1": 0.5354330708661418,
+    "brier_score": 0.18981781601905823,
+    "threshold": 0.5,
+    "confusion_matrix": {
+      "true_negative": 107,
+      "false_positive": 33,
+      "false_negative": 26,
+      "true_positive": 34
+    },
+    "roc_curve": [
+      {
+        "fpr": 0.0,
+        "tpr": 0.0
+      },
+      {
+        "fpr": 0.0,
+        "tpr": 0.016666666666666666
+      },
+      {
+        "fpr": 0.007142857142857143,
+        "tpr": 0.016666666666666666
+      },
+      {
+        "fpr": 0.007142857142857143,
+        "tpr": 0.06666666666666667
+      },
+      {
+        "fpr": 0.014285714285714285,
+        "tpr": 0.06666666666666667
+      },
+      {
+        "fpr": 0.014285714285714285,
+        "tpr": 0.11666666666666667
+      },
+      {
+        "fpr": 0.02142857142857143,
+        "tpr": 0.11666666666666667
+      },
+      {
+        "fpr": 0.02142857142857143,
+        "tpr": 0.15
+      },
+      {
+        "fpr": 0.02857142857142857,
+        "tpr": 0.15
+      },
+      {
+        "fpr": 0.02857142857142857,
+        "tpr": 0.2
+      },
+      {
+        "fpr": 0.05714285714285714,
+        "tpr": 0.2
+      },
+      {
+        "fpr": 0.05714285714285714,
+        "tpr": 0.25
+      },
+      {
+        "fpr": 0.07142857142857142,
+        "tpr": 0.26666666666666666
+      },
+      {
+        "fpr": 0.08571428571428572,
+        "tpr": 0.26666666666666666
+      },
+      {
+        "fpr": 0.08571428571428572,
+        "tpr": 0.35
+      },
+      {
+        "fpr": 0.11428571428571428,
+        "tpr": 0.35
+      },
+      {
+        "fpr": 0.11428571428571428,
+        "tpr": 0.36666666666666664
+      },
+      {
+        "fpr": 0.12142857142857143,
+        "tpr": 0.36666666666666664
+      },
+      {
+        "fpr": 0.12142857142857143,
+        "tpr": 0.4
+      },
+      {
+        "fpr": 0.14285714285714285,
+        "tpr": 0.4
+      },
+      {
+        "fpr": 0.14285714285714285,
+        "tpr": 0.55
+      },
+      {
+        "fpr": 0.15,
+        "tpr": 0.55
+      },
+      {
+        "fpr": 0.15,
+        "tpr": 0.5666666666666667
+      },
+      {
+        "fpr": 0.24285714285714285,
+        "tpr": 0.5666666666666667
+      },
+      {
+        "fpr": 0.2571428571428571,
+        "tpr": 0.5833333333333334
+      },
+      {
+        "fpr": 0.2571428571428571,
+        "tpr": 0.6
+      },
+      {
+        "fpr": 0.2642857142857143,
+        "tpr": 0.6
+      },
+      {
+        "fpr": 0.2642857142857143,
+        "tpr": 0.6166666666666667
+      },
+      {
+        "fpr": 0.2714285714285714,
+        "tpr": 0.6166666666666667
+      },
+      {
+        "fpr": 0.2714285714285714,
+        "tpr": 0.6333333333333333
+      },
+      {
+        "fpr": 0.29285714285714287,
+        "tpr": 0.6333333333333333
+      },
+      {
+        "fpr": 0.29285714285714287,
+        "tpr": 0.65
+      },
+      {
+        "fpr": 0.32857142857142857,
+        "tpr": 0.65
+      },
+      {
+        "fpr": 0.32857142857142857,
+        "tpr": 0.7
+      },
+      {
+        "fpr": 0.3357142857142857,
+        "tpr": 0.7
+      },
+      {
+        "fpr": 0.3357142857142857,
+        "tpr": 0.7166666666666667
+      },
+      {
+        "fpr": 0.35714285714285715,
+        "tpr": 0.75
+      },
+      {
+        "fpr": 0.36428571428571427,
+        "tpr": 0.75
+      },
+      {
+        "fpr": 0.36428571428571427,
+        "tpr": 0.7666666666666667
+      },
+      {
+        "fpr": 0.37142857142857144,
+        "tpr": 0.7666666666666667
+      },
+      {
+        "fpr": 0.37142857142857144,
+        "tpr": 0.8166666666666667
+      },
+      {
+        "fpr": 0.40714285714285714,
+        "tpr": 0.8166666666666667
+      },
+      {
+        "fpr": 0.40714285714285714,
+        "tpr": 0.8333333333333334
+      },
+      {
+        "fpr": 0.45,
+        "tpr": 0.8333333333333334
+      },
+      {
+        "fpr": 0.45,
+        "tpr": 0.85
+      },
+      {
+        "fpr": 0.4857142857142857,
+        "tpr": 0.85
+      },
+      {
+        "fpr": 0.4857142857142857,
+        "tpr": 0.8666666666666667
+      },
+      {
+        "fpr": 0.5285714285714286,
+        "tpr": 0.8666666666666667
+      },
+      {
+        "fpr": 0.55,
+        "tpr": 0.9
+      },
+      {
+        "fpr": 0.55,
+        "tpr": 0.9166666666666666
+      },
+      {
+        "fpr": 0.5785714285714286,
+        "tpr": 0.9166666666666666
+      },
+      {
+        "fpr": 0.5785714285714286,
+        "tpr": 0.9333333333333333
+      },
+      {
+        "fpr": 0.6,
+        "tpr": 0.9333333333333333
+      },
+      {
+        "fpr": 0.6,
+        "tpr": 0.95
+      },
+      {
+        "fpr": 0.6857142857142857,
+        "tpr": 0.95
+      },
+      {
+        "fpr": 0.6857142857142857,
+        "tpr": 0.9666666666666667
+      },
+      {
+        "fpr": 0.6928571428571428,
+        "tpr": 0.9666666666666667
+      },
+      {
+        "fpr": 0.6928571428571428,
+        "tpr": 0.9833333333333333
+      },
+      {
+        "fpr": 0.7357142857142858,
+        "tpr": 0.9833333333333333
+      },
+      {
+        "fpr": 1.0,
+        "tpr": 1.0
+      }
+    ],
+    "calibration": [
+      {
+        "predicted": 0.012068079184973612,
+        "observed": 0.0
+      },
+      {
+        "predicted": 0.034781435132026674,
+        "observed": 0.05
+      },
+      {
+        "predicted": 0.07224766947329045,
+        "observed": 0.15
+      },
+      {
+        "predicted": 0.13376167900860308,
+        "observed": 0.2
+      },
+      {
+        "predicted": 0.2012978181242943,
+        "observed": 0.2
+      },
+      {
+        "predicted": 0.3146314166486263,
+        "observed": 0.45
+      },
+      {
+        "predicted": 0.47940068393945695,
+        "observed": 0.25
+      },
+      {
+        "predicted": 0.6258688539266586,
+        "observed": 0.55
+      },
+      {
+        "predicted": 0.7775166451930999,
+        "observed": 0.55
+      },
+      {
+        "predicted": 0.8857655733823776,
+        "observed": 0.6
+      }
+    ]
+  },
+  "global_shap_importance": [
+    {
+      "feature": "checking_score",
+      "importance": 0.57706
+    },
+    {
+      "feature": "monthly_installment_estimate",
+      "importance": 0.39629
+    },
+    {
+      "feature": "credit_amount",
+      "importance": 0.25802
+    },
+    {
+      "feature": "credit_history_critical_or_other_credits",
+      "importance": 0.25709
+    },
+    {
+      "feature": "employment_stability_score",
+      "importance": 0.24206
+    },
+    {
+      "feature": "loan_to_age_ratio",
+      "importance": 0.24013
+    },
+    {
+      "feature": "credit_utilisation_proxy",
+      "importance": 0.23463
+    },
+    {
+      "feature": "duration_months",
+      "importance": 0.22489
+    },
+    {
+      "feature": "savings_score",
+      "importance": 0.21723
+    },
+    {
+      "feature": "savings_status_lt_100_dm",
+      "importance": 0.20263
+    },
+    {
+      "feature": "has_other_installment_plans",
+      "importance": 0.19725
+    },
+    {
+      "feature": "employment_since_4_to_7_years",
+      "importance": 0.18969
+    },
+    {
+      "feature": "age_years",
+      "importance": 0.1739
+    },
+    {
+      "feature": "purpose_car_used",
+      "importance": 0.1594
+    },
+    {
+      "feature": "housing_rent",
+      "importance": 0.1518
+    },
+    {
+      "feature": "debt_service_burden",
+      "importance": 0.13347
+    },
+    {
+      "feature": "credit_history_length_score",
+      "importance": 0.12643
+    },
+    {
+      "feature": "checking_status_no_checking_account",
+      "importance": 0.11431
+    },
+    {
+      "feature": "purpose_education",
+      "importance": 0.09229
+    },
+    {
+      "feature": "existing_credits_count",
+      "importance": 0.08795
+    }
+  ],
+  "feature_documentation": {
+    "duration_months": "Longer terms expose the lender to more future income shocks.",
+    "credit_amount": "Larger exposures are harder to service and to recover.",
+    "installment_rate_pct_income": "Debt-service burden: instalment as a share of disposable income.",
+    "age_years": "Proxy for career stage and accumulated financial buffer.",
+    "existing_credits_count": "Existing debt burden across the banking system.",
+    "present_residence_since": "Residential stability, a classic behavioural stability signal.",
+    "dependents": "More dependents reduce income available for debt service.",
+    "monthly_installment_estimate": "credit_amount / duration_months - the actual monthly cash outflow.",
+    "log_credit_amount": "Log exposure compresses the long right tail of loan sizes.",
+    "loan_to_age_ratio": "Exposure relative to age; a large loan early in a career is riskier.",
+    "duration_years": "Term expressed in years for interpretability.",
+    "debt_service_burden": "installment_rate x existing_credits - combined servicing pressure.",
+    "residual_income_share": "100 - instalment rate: share of income left after servicing this loan.",
+    "employment_stability_score": "Ordinal tenure score; stable employment lowers default risk.",
+    "credit_history_length_score": "Ordinal repayment-history quality (payment history indicator).",
+    "savings_score": "Liquid savings buffer available to absorb shocks.",
+    "checking_score": "Checking-account standing; overdrafts signal cash-flow stress.",
+    "has_collateral": "Real estate or life insurance reduces loss given default.",
+    "has_guarantor": "Guarantor or co-applicant adds a secondary source of repayment.",
+    "has_other_installment_plans": "Parallel instalment plans increase total debt burden.",
+    "credit_utilisation_proxy": "Monthly outflow scaled by instalment rate - utilisation intensity."
+  },
+  "risk_thresholds": {
+    "low_max": 0.3,
+    "medium_max": 0.6
+  },
+  "disclaimer": "Decision-support / educational system. Not a regulated credit underwriting decision and not financial advice."
+}
