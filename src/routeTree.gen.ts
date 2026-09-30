@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExplainabilityRouteImport } from './routes/explainability'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as PerformanceRouteImport } from './routes/performance'
+import { Route as PredictRouteImport } from './routes/predict'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExplainabilityRoute = ExplainabilityRouteImport.update({
+  id: '/explainability',
+  path: '/explainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerformanceRoute = PerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredictRoute = PredictRouteImport.update({
+  id: '/predict',
+  path: '/predict',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explainability': typeof ExplainabilityRoute
+  '/history': typeof HistoryRoute
+  '/performance': typeof PerformanceRoute
+  '/predict': typeof PredictRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explainability': typeof ExplainabilityRoute
+  '/history': typeof HistoryRoute
+  '/performance': typeof PerformanceRoute
+  '/predict': typeof PredictRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/explainability': typeof ExplainabilityRoute
+  '/history': typeof HistoryRoute
+  '/performance': typeof PerformanceRoute
+  '/predict': typeof PredictRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/explainability' | '/history' | '/performance' | '/predict'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/explainability' | '/history' | '/performance' | '/predict'
+  id:
+    | '__root__'
+    | '/'
+    | '/explainability'
+    | '/history'
+    | '/performance'
+    | '/predict'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExplainabilityRoute: typeof ExplainabilityRoute
+  HistoryRoute: typeof HistoryRoute
+  PerformanceRoute: typeof PerformanceRoute
+  PredictRoute: typeof PredictRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explainability': {
+      id: '/explainability'
+      path: '/explainability'
+      fullPath: '/explainability'
+      preLoaderRoute: typeof ExplainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/performance': {
+      id: '/performance'
+      path: '/performance'
+      fullPath: '/performance'
+      preLoaderRoute: typeof PerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/predict': {
+      id: '/predict'
+      path: '/predict'
+      fullPath: '/predict'
+      preLoaderRoute: typeof PredictRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExplainabilityRoute: ExplainabilityRoute,
+  HistoryRoute: HistoryRoute,
+  PerformanceRoute: PerformanceRoute,
+  PredictRoute: PredictRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
