@@ -22,6 +22,20 @@
       "when": 1791030952350,
       "tag": "0002_restrict_reads_to_authenticated",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791031613188,
+      "tag": "0003_owner_scoped_predictions_and_admin_roles",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791031641236,
+      "tag": "0004_claim_initial_admin_function",
+      "breakpoints": true
     }
   ]
 }
