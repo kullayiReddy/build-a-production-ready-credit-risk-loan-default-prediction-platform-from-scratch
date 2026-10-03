@@ -27,7 +27,7 @@ import {
 import { scoreApplicant, type ApplicantForm } from "@/lib/credit.functions";
 import { percent, savePrediction } from "@/lib/predictions";
 
-export const Route = createFileRoute("/predict")({
+export const Route = createFileRoute("/_authenticated/predict")({
   head: () => ({
     meta: [
       { title: "Loan Risk Predictor | Credit Risk Platform" },

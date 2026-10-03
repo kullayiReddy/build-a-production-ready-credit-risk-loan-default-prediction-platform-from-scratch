@@ -6,7 +6,7 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recha
 import { AppShell, PageHeader } from "@/components/app-shell";
 import { getModelInfo } from "@/lib/credit.functions";
 
-export const Route = createFileRoute("/explainability")({
+export const Route = createFileRoute("/_authenticated/explainability")({
   head: () => ({
     meta: [
       { title: "Explainability | Credit Risk Platform" },

@@ -10,79 +10,120 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ExplainabilityRouteImport } from './routes/explainability'
-import { Route as HistoryRouteImport } from './routes/history'
-import { Route as PerformanceRouteImport } from './routes/performance'
-import { Route as PredictRouteImport } from './routes/predict'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedExplainabilityRouteImport } from './routes/_authenticated/explainability'
+import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedPerformanceRouteImport } from './routes/_authenticated/performance'
+import { Route as AuthenticatedPredictRouteImport } from './routes/_authenticated/predict'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExplainabilityRoute = ExplainabilityRouteImport.update({
-  id: '/explainability',
-  path: '/explainability',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HistoryRoute = HistoryRouteImport.update({
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExplainabilityRoute =
+  AuthenticatedExplainabilityRouteImport.update({
+    id: '/explainability',
+    path: '/explainability',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
   id: '/history',
   path: '/history',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PerformanceRoute = PerformanceRouteImport.update({
-  id: '/performance',
-  path: '/performance',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PredictRoute = PredictRouteImport.update({
+const AuthenticatedPerformanceRoute =
+  AuthenticatedPerformanceRouteImport.update({
+    id: '/performance',
+    path: '/performance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPredictRoute = AuthenticatedPredictRouteImport.update({
   id: '/predict',
   path: '/predict',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/explainability': typeof ExplainabilityRoute
-  '/history': typeof HistoryRoute
-  '/performance': typeof PerformanceRoute
-  '/predict': typeof PredictRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/explainability': typeof AuthenticatedExplainabilityRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/performance': typeof AuthenticatedPerformanceRoute
+  '/predict': typeof AuthenticatedPredictRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/explainability': typeof ExplainabilityRoute
-  '/history': typeof HistoryRoute
-  '/performance': typeof PerformanceRoute
-  '/predict': typeof PredictRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/explainability': typeof AuthenticatedExplainabilityRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/performance': typeof AuthenticatedPerformanceRoute
+  '/predict': typeof AuthenticatedPredictRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/explainability': typeof ExplainabilityRoute
-  '/history': typeof HistoryRoute
-  '/performance': typeof PerformanceRoute
-  '/predict': typeof PredictRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/explainability': typeof AuthenticatedExplainabilityRoute
+  '/_authenticated/history': typeof AuthenticatedHistoryRoute
+  '/_authenticated/performance': typeof AuthenticatedPerformanceRoute
+  '/_authenticated/predict': typeof AuthenticatedPredictRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explainability' | '/history' | '/performance' | '/predict'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explainability' | '/history' | '/performance' | '/predict'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/auth'
+    | '/dashboard'
     | '/explainability'
     | '/history'
     | '/performance'
     | '/predict'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/explainability'
+    | '/history'
+    | '/performance'
+    | '/predict'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/explainability'
+    | '/_authenticated/history'
+    | '/_authenticated/performance'
+    | '/_authenticated/predict'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExplainabilityRoute: typeof ExplainabilityRoute
-  HistoryRoute: typeof HistoryRoute
-  PerformanceRoute: typeof PerformanceRoute
-  PredictRoute: typeof PredictRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -94,43 +135,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/explainability': {
-      id: '/explainability'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/explainability': {
+      id: '/_authenticated/explainability'
       path: '/explainability'
       fullPath: '/explainability'
-      preLoaderRoute: typeof ExplainabilityRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedExplainabilityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/history': {
-      id: '/history'
+    '/_authenticated/history': {
+      id: '/_authenticated/history'
       path: '/history'
       fullPath: '/history'
-      preLoaderRoute: typeof HistoryRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/performance': {
-      id: '/performance'
+    '/_authenticated/performance': {
+      id: '/_authenticated/performance'
       path: '/performance'
       fullPath: '/performance'
-      preLoaderRoute: typeof PerformanceRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedPerformanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/predict': {
-      id: '/predict'
+    '/_authenticated/predict': {
+      id: '/_authenticated/predict'
       path: '/predict'
       fullPath: '/predict'
-      preLoaderRoute: typeof PredictRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedPredictRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedExplainabilityRoute: typeof AuthenticatedExplainabilityRoute
+  AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
+  AuthenticatedPerformanceRoute: typeof AuthenticatedPerformanceRoute
+  AuthenticatedPredictRoute: typeof AuthenticatedPredictRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedExplainabilityRoute: AuthenticatedExplainabilityRoute,
+  AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
+  AuthenticatedPerformanceRoute: AuthenticatedPerformanceRoute,
+  AuthenticatedPredictRoute: AuthenticatedPredictRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExplainabilityRoute: ExplainabilityRoute,
-  HistoryRoute: HistoryRoute,
-  PerformanceRoute: PerformanceRoute,
-  PredictRoute: PredictRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

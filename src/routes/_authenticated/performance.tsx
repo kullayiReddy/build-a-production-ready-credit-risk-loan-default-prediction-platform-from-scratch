@@ -16,7 +16,7 @@ import { StatCard } from "@/components/risk-badge";
 import { getModelInfo } from "@/lib/credit.functions";
 import { percent } from "@/lib/predictions";
 
-export const Route = createFileRoute("/performance")({
+export const Route = createFileRoute("/_authenticated/performance")({
   head: () => ({
     meta: [
       { title: "Model Performance | Credit Risk Platform" },

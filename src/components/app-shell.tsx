@@ -1,9 +1,12 @@
-import { Link } from "@tanstack/react-router";
-import { Activity, BarChart3, Gauge, History, ShieldAlert } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { Activity, BarChart3, Gauge, History, LogOut, ShieldAlert } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { supabase } from "@/integrations/supabase/client";
+
 const NAV = [
-  { to: "/", label: "Dashboard", icon: Gauge },
+  { to: "/dashboard", label: "Dashboard", icon: Gauge },
   { to: "/predict", label: "Risk predictor", icon: ShieldAlert },
   { to: "/explainability", label: "Explainability", icon: Activity },
   { to: "/performance", label: "Model performance", icon: BarChart3 },
@@ -11,11 +14,21 @@ const NAV = [
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 border-b border-border/80 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/dashboard" className="flex items-center gap-3">
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
               <ShieldAlert className="size-5" />
             </span>
@@ -31,13 +44,20 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Link
                 key={to}
                 to={to}
-                activeOptions={{ exact: to === "/" }}
                 className="flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground data-[status=active]:bg-secondary data-[status=active]:text-foreground"
               >
                 <Icon className="size-4" />
                 {label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              <LogOut className="size-4" />
+              Sign out
+            </button>
           </nav>
         </div>
       </header>
