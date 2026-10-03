@@ -48,6 +48,7 @@ function AuthPage() {
       if (mode === "sign-in") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        await supabase.rpc("claim_initial_admin");
         navigate({ to: "/dashboard", replace: true });
       } else {
         const { error } = await supabase.auth.signUp({ email, password });
