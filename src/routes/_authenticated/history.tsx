@@ -7,7 +7,7 @@ import { RiskBadge } from "@/components/risk-badge";
 import { Button } from "@/components/ui/button";
 import { percent, predictionsQuery } from "@/lib/predictions";
 
-export const Route = createFileRoute("/history")({
+export const Route = createFileRoute("/_authenticated/history")({
   head: () => ({
     meta: [
       { title: "Prediction History | Credit Risk Platform" },

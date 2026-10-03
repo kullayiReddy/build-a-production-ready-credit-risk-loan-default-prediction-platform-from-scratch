@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { getModelInfo } from "@/lib/credit.functions";
 import { percent, predictionsQuery, summarise } from "@/lib/predictions";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Credit Risk Dashboard | Loan Default Prediction" },
