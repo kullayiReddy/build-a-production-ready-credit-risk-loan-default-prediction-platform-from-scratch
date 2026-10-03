@@ -37,7 +37,10 @@ export type SavePredictionArgs = {
 };
 
 export async function savePrediction(args: SavePredictionArgs) {
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData.user) throw new Error("You must be signed in to save a prediction.");
   const { error } = await supabase.from("predictions").insert({
+    user_id: userData.user.id,
     applicant_input: args.applicant,
     default_probability: args.default_probability,
     prediction: args.prediction,
